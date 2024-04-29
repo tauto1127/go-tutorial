@@ -3,17 +3,13 @@ package frameworks
 import "go-clean-architecture-tutorial/core/entity"
 import "go-clean-architecture-tutorial/core/repository"
 
-var products = []entity.Product{
-	entity.Product{ID: 1, Name: "Product 1", Price: 100},
-	entity.Product{ID: 2, Name: "Product 2", Price: 200},
-}
-
 type ProductDatabaseArray struct {
 	repository.ProductRepository
+	products []entity.Product
 }
 
 func (p *ProductDatabaseArray) FindByID(id int) (*entity.Product, error) {
-	for _, product := range products {
+	for _, product := range p.products {
 		if product.ID == id {
 			return &product, nil
 		}
@@ -22,10 +18,11 @@ func (p *ProductDatabaseArray) FindByID(id int) (*entity.Product, error) {
 }
 
 func (p *ProductDatabaseArray) Save(product *entity.Product) error {
-	products = append(products, *product)
+	p.products = append(p.products, *product)
 	return nil
 }
 
+// #TODO コントローラーとユースケースを定義しなきゃダメかも
 func (p *ProductDatabaseArray) GetAll() ([]entity.Product, error) {
-	return products, nil
+	return p.products, nil
 }

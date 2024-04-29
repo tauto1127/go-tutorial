@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"go-clean-architecture-tutorial/core/entity"
 	"go-clean-architecture-tutorial/core/usecase"
 	"net/http"
 	"strconv"
@@ -27,4 +28,16 @@ func (c *AddProductToCartController) Handle(r *http.Request) error {
 	}
 
 	return nil
+}
+
+type GetAllProductsController struct {
+	UseCase usecase.GetAllProductsUsecase
+}
+
+func (c *GetAllProductsController) Handle(r *http.Request) (products []entity.Product, error error) {
+	products, err := c.UseCase.Execute()
+	if err != nil {
+		return
+	}
+	return products, nil
 }
