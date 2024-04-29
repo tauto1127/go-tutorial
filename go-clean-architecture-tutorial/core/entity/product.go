@@ -1,6 +1,8 @@
-package core
+package entity
 
-import "errors"
+import (
+	"errors"
+)
 
 type Product struct {
 	ID          int
