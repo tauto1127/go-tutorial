@@ -5,11 +5,11 @@ import (
 )
 
 type Product struct {
-	ID          int
-	Name        string
-	Description string
-	Price       float64
-	Quantity    int
+	ID          int     `json:"id"`
+	Name        string  `json:"name"`
+	Description string  `json:"description"`
+	Price       float64 `json:"price"`
+	Quantity    int     `json:"quantity"`
 }
 
 func (p *Product) UpdateName(name string) error {
