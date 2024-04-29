@@ -1,24 +1,15 @@
-package main
+package usecase
 
 import (
-	"go-clean-architecture-tutorial/core/entity"
+	"go-clean-architecture-tutorial/core/repository"
 )
 
-type ProductRepository interface {
-	FindByID(id int) (*entity.Product, error)
-	Save(p *entity.Product) error
-}
-
-type CartRepository interface {
-	FindByID(id int) (*entity.Cart, error)
-	Save(c *entity.Cart) error
-}
-
 type AddProductToCartUsecase struct {
-	ProductRepository ProductRepository
-	CartRepository    CartRepository
+	ProductRepository repository.ProductRepository
+	CartRepository    repository.CartRepository
 }
 
+// Execute adds a Product to a Cart
 func (uc *AddProductToCartUsecase) Execute(productID int, cartID int) error {
 	// Get the Product from the ProductRepository
 	product, err := uc.ProductRepository.FindByID(productID)
