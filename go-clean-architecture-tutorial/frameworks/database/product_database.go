@@ -1,4 +1,4 @@
-package frameworks
+package database
 
 import "go-clean-architecture-tutorial/core/entity"
 import "go-clean-architecture-tutorial/core/repository"
